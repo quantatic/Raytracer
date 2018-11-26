@@ -1,5 +1,6 @@
 #include "sphere.h"
 #include "ray.h"
+#include "hitable.h"
 #include <math.h>
 #include <stdlib.h>
 
@@ -26,14 +27,26 @@ void freeSphere(Sphere *s) {
     free(s);
 }
 
-float rayIntersectsSphere(Ray *r, Sphere *s) {
+bool hitSphere(Sphere *s, Ray *r, HitRecord *rec) {
     Vector *o_sub_c = makeVector();
     subVectors(r->pos, s->pos, o_sub_c);
 
-    double intersectionTestValue = pow(dotProduct(o_sub_c, r->direction), 2);
-    intersectionTestValue -= normSquared(o_sub_c);
-    intersectionTestValue += pow(s->radius, 2);
+    double a = normSquared(r->direction);
+    double b = 2 * dotProduct(r->direction, o_sub_c);
+    double c = normSquared(o_sub_c) - pow(s->radius, 2);
 
     freeVector(o_sub_c);
-    return (intersectionTestValue >= 0); //solving for the discriminant, if >=0, has real solutions
+
+    double discriminant = pow(b, 2) - (4 * a * c);
+    if(discriminant < 0) {
+        return false;
+    }
+
+    float t1 = (-b + sqrt(discriminant)) / (2 * a);
+    float t2 = (-b - sqrt(discriminant)) / (2 * a);
+    float t = fmin(t1, t2);
+    pointAtParameter(r, t, rec->point);
+    subVectors(rec->point, s->pos, rec->normal);
+    unitVector(rec->normal, rec->normal);
+    return true; 
 }

@@ -17,6 +17,8 @@ void updateRay(Ray *r, double posX, double posY, double posZ, double dirX, doubl
 void updateRayFromOther(Ray *r, Ray *other);
 void freeRay(Ray *r);
 
+void pointAtParameter(Ray *r, double t, Vector *result);
+
 Vector *makeVector();
 void updateVector(Vector *v, double x, double y, double z);
 void updateVectorFromOther(Vector *v, Vector *other);

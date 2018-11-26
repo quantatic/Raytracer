@@ -26,6 +26,11 @@ void freeRay(Ray *r) {
     free(r);
 }
 
+void pointAtParameter(Ray *r, double t, Vector *result) {
+    multVector(r->direction, t, result);
+    addVectors(result, r->pos, result);
+}
+
 Vector *makeVector() {
     Vector *result = malloc(sizeof(Vector));
     result->x = 0;
