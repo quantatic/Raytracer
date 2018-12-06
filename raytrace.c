@@ -1,9 +1,9 @@
+#include <stdlib.h>
+#include <stdio.h>
 #include "sphere.h"
 #include "ray.h"
 #include "raytrace.h"
 #include "hitable.h"
-#include <stdlib.h>
-#include <stdio.h>
 
 int main() {
     FILE *outFile = fopen("output.ppm", "w"); 
@@ -11,8 +11,8 @@ int main() {
     Sphere *sphere = makeSphere();
     updateSphere(sphere, 0, 0, -5, 1);
 
-    int nx = 100;
-    int ny = 100;
+    int nx = 1000;
+    int ny = 1000;
     int ns = 10;
     double pixelScale = 0.001;
 

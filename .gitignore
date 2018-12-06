@@ -1,2 +1,4 @@
-*.ppm
-*.sw*
+*
+!Makefile
+!*.c
+!*.h
