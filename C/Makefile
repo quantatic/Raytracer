@@ -8,12 +8,11 @@ OBJ_DIR=bin
 SRC_FILES=$(wildcard $(SRC_DIR)/*.c)
 OBJ_FILES=$(SRC_FILES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	$(CC) $< -o $a -c $(CFLAGS)
-
 raytrace: $(OBJ_FILES)
+	$(CC) $^ -o $@ $(LDLIBS)
 
-$(info VAR IS $(OBJ_FILES))
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	$(CC) $< -o $@ -c $(CFLAGS)
 
 clean:
 	rm -rf $(OBJ_FILES)
