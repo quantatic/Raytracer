@@ -1,17 +1,19 @@
 CC = gcc
 CFLAGS = -std=c99 -Wall -Werror -g -O2
 LDLIBS = -lm
-OBJ_FILES = ray.o sphere.o raytrace.o hitable.o
 
-raytrace: raytrace.o ray.o sphere.o hitable.o
+SRC_DIR=src
+OBJ_DIR=bin
 
-raytrace.o: raytrace.c ray.h sphere.h
+SRC_FILES=$(wildcard $(SRC_DIR)/*.c)
+OBJ_FILES=$(SRC_FILES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-ray.o: ray.h ray.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	$(CC) $< -o $a -c $(CFLAGS)
 
-sphere.o: sphere.c sphere.h ray.h
+raytrace: $(OBJ_FILES)
 
-hitable.o: hitable.c hitable.h sphere.h ray.h
+$(info VAR IS $(OBJ_FILES))
 
 clean:
 	rm -rf $(OBJ_FILES)
