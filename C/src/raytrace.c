@@ -11,10 +11,10 @@ int main() {
     Sphere *sphere = makeSphere();
     updateSphere(sphere, 0, 0, -5, 1);
 
-    int nx = 1000;
-    int ny = 1000;
+    int nx = 100;
+    int ny = 100;
     int ns = 10;
-    double pixelScale = 0.001;
+    double pixelScale = 0.01;
 
     fprintf(outFile, "P6\n%d %d\n255\n", nx, ny);
 
